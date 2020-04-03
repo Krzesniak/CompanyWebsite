@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let obj;
+        async function getfetch(){
+            const headers = new Headers();
+            headers.append('Accept', 'application/json');
+            const request = new Request("http://localhost:8090/companies", { method: 'GET', cache: 'reload', headers: headers });
+            const myResponse =  await fetch(request);
+            let commits = await myResponse.json();
+            let array = commits._embedded.companies;
+            obj = await array;
+            let firstOne = array[0];
+
+            return await obj;
+        }
+        getfetch().then( e => {
+            console.log(e[0].name);
+            console.log(e[2].street);
+        });
+
+    </script>
+</head>
+<body>
+Witam poniżej moj piewrszy fetch;
+<div id = "feniks">
+    Tutaj cyrk <br>
+    a tutaj fetch
+</div>
+</body>
+</html>
